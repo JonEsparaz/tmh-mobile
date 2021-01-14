@@ -31,9 +31,9 @@ import { TeachingStackParamList } from '../../navigation/MainTabNavigator';
 import UserContext from '../../contexts/UserContext';
 import { MainStackParamList } from '../../navigation/AppNavigator';
 import {
-  GetVideoByVideoTypeQueryVariables,
-  GetVideoByVideoTypeQuery,
-} from '../../services/API';
+  PopularTeachingQuery,
+  PopularTeachingQueryVariables,
+} from '../../graphql/API';
 import { AnimatedFallbackImage } from '../../components/FallbackImage';
 import SeriesItem from '../../components/teaching/SeriesItem';
 import { popularTeachingQuery } from '../../graphql/queries';
@@ -193,7 +193,7 @@ const style = StyleSheet.create({
 });
 
 type PopularVideoData = NonNullable<
-  NonNullable<GetVideoByVideoTypeQuery['getVideoByVideoType']>['items']
+  NonNullable<PopularTeachingQuery['getVideoByVideoType']>['items']
 >;
 
 interface Params {
@@ -320,7 +320,7 @@ export default function TeachingScreen({ navigation }: Params): JSX.Element {
   useEffect(() => {
     const getPopularTeaching = async () => {
       const startDate = moment().subtract(150, 'days').format('YYYY-MM-DD');
-      const variables: GetVideoByVideoTypeQueryVariables = {
+      const variables: PopularTeachingQueryVariables = {
         limit: 30,
         videoTypes: 'adult-sunday',
         publishedDate: { gt: startDate },
@@ -330,7 +330,7 @@ export default function TeachingScreen({ navigation }: Params): JSX.Element {
         query: popularTeachingQuery,
         variables,
         authMode: GRAPHQL_AUTH_MODE.API_KEY,
-      })) as GraphQLResult<GetVideoByVideoTypeQuery>;
+      })) as GraphQLResult<PopularTeachingQuery>;
       const items = json?.data?.getVideoByVideoType?.items ?? [];
       const popularTeaching = items.filter((item) =>
         item?.viewCount ? parseInt(item?.viewCount, 10) >= 700 : false

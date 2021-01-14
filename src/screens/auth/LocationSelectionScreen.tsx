@@ -13,7 +13,6 @@ import {
   ListItem,
 } from 'native-base';
 import { StyleSheet, TouchableOpacity } from 'react-native';
-
 import { StackNavigationProp } from '@react-navigation/stack';
 import LocationsService from '../../services/LocationsService';
 import Theme, { Style, HeaderStyle } from '../../Theme.style';

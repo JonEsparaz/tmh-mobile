@@ -6,7 +6,6 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import { RouteProp } from '@react-navigation/native';
 import YoutubePlayer, { YoutubeIframeRef } from 'react-native-youtube-iframe';
 import { Theme, Style, HeaderStyle } from '../Theme.style';
-
 import NotesScreen from './teaching/NotesScreen';
 import { MainStackParamList } from '../navigation/AppNavigator';
 import LiveEventService from '../services/LiveEventService';

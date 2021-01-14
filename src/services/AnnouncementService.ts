@@ -1,8 +1,8 @@
 import moment from 'moment';
 import API, { graphqlOperation, GraphQLResult } from '@aws-amplify/api';
 import LocationService, { Location } from './LocationsService';
-import { ListAnnouncementsQuery } from './API';
-import { listAnnouncements } from './queries';
+import { ListAnnouncementsQuery } from './graphql/API';
+import { listAnnouncements } from './graphql/queries';
 
 export type Announcement = NonNullable<
   NonNullable<ListAnnouncementsQuery['listAnnouncements']>['items']

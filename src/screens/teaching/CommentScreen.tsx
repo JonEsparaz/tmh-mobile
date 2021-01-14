@@ -17,17 +17,6 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import moment from 'moment';
 import { GRAPHQL_AUTH_MODE, GraphQLResult, API } from '@aws-amplify/api';
 import { nanoid } from 'nanoid/async/index.native';
-import {
-  CreateCommentInput,
-  NoteDataType,
-  CommentDataType,
-  GetCommentsByOwnerQuery,
-  DeleteCommentInput,
-  UpdateCommentInput,
-  GetCommentsByOwnerQueryVariables,
-  UpdateCommentMutation,
-  CreateCommentMutation,
-} from '../../services/API';
 import { MainStackParamList } from '../../navigation/AppNavigator';
 import Theme, { Style, HeaderStyle } from '../../Theme.style';
 import CommentContext from '../../contexts/CommentContext';
@@ -35,6 +24,17 @@ import UserContext, { TMHCognitoUser } from '../../contexts/UserContext';
 import MiniPlayerStyleContext from '../../contexts/MiniPlayerStyleContext';
 import NeedsSignUpModal from '../../components/modals/NeedsSignUpModal';
 import { getTagsByOwner } from '../../graphql/queries';
+import {
+  CreateCommentMutation,
+  UpdateCommentMutation,
+  GetTagsByOwnerQuery,
+  UpdateCommentInput,
+  DeleteCommentInput,
+  GetTagsByOwnerQueryVariables,
+  CreateCommentInput,
+  CommentDataType,
+  NoteDataType,
+} from '../../graphql/API';
 import {
   updateComment,
   createComment,
@@ -240,7 +240,7 @@ export default function CommentScreen({
     const getTags = async () => {
       try {
         const cognitoUser: TMHCognitoUser = await Auth.currentAuthenticatedUser();
-        const input: GetCommentsByOwnerQueryVariables = {
+        const input: GetTagsByOwnerQueryVariables = {
           owner: cognitoUser.username,
           limit: 8,
         };
@@ -248,7 +248,7 @@ export default function CommentScreen({
           query: getTagsByOwner,
           variables: input,
           authMode: GRAPHQL_AUTH_MODE.AMAZON_COGNITO_USER_POOLS,
-        })) as GraphQLResult<GetCommentsByOwnerQuery>;
+        })) as GraphQLResult<GetTagsByOwnerQuery>;
 
         const oldTags: string[] = [];
 

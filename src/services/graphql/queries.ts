@@ -24,7 +24,7 @@ export const listAnnouncements = /* GraphQL */ `
 `;
 
 export const getSeriesBySeriesType = `
-  query getSeriesBySeriesType(
+  query GetSeriesBySeriesType(
     $seriesType: String, 
     $startDate: ModelStringKeyConditionInput, 
     $sortDirection: ModelSortDirection, 
@@ -315,7 +315,7 @@ export const listLivestreams = /* GraphQL */ `
 `;
 
 export const checkIfNotesExistQuery = /* GraphQL */ `
-  query GetNotes($id: ID!) {
+  query CheckIfNotesExist($id: ID!) {
     getNotes(id: $id) {
       id
     }
@@ -323,7 +323,7 @@ export const checkIfNotesExistQuery = /* GraphQL */ `
 `;
 
 export const getNotesNoContent = /* GraphQL */ `
-  query GetNotes($id: ID!) {
+  query GetNotesNoContent($id: ID!) {
     getNotes(id: $id) {
       id
       title
@@ -508,7 +508,7 @@ export const getVideoByVideoType = /* GraphQL */ `
 `;
 
 export const listSpeakersNoVideos = `
-  query ListSpeakers(
+  query ListSpeakersNoVideos(
     $filter: ModelSpeakerFilterInput
     $limit: Int
     $nextToken: String

@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import { GetCommentsByOwnerQuery } from '../services/API';
+import { GetCommentsByOwnerQuery } from '../graphql/API';
 
 export type CommentContextType = {
   comments: NonNullable<

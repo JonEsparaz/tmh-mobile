@@ -6,9 +6,9 @@ import API, { GraphQLResult, GRAPHQL_AUTH_MODE } from '@aws-amplify/api';
 import Auth from '@aws-amplify/auth';
 import { LoadSermonResult } from '../../services/SermonsService';
 import {
-  GetCommentsByOwnerQueryVariables,
-  GetCommentsByOwnerQuery,
-} from '../../services/API';
+  CommentExistsQuery,
+  CommentExistsQueryVariables,
+} from '../../graphql/API';
 import Theme from '../../Theme.style';
 import { TMHCognitoUser } from '../../contexts/UserContext';
 import { commentExistsQuery } from '../../graphql/queries';
@@ -72,7 +72,7 @@ export default function TeachingListItem({
     const getComments = async () => {
       try {
         const cognitoUser: TMHCognitoUser = await Auth.currentAuthenticatedUser();
-        const input: GetCommentsByOwnerQueryVariables = {
+        const input: CommentExistsQueryVariables = {
           owner: cognitoUser.username,
           noteId: { eq: teaching?.publishedDate },
         };
@@ -80,7 +80,7 @@ export default function TeachingListItem({
           query: commentExistsQuery,
           variables: input,
           authMode: GRAPHQL_AUTH_MODE.AMAZON_COGNITO_USER_POOLS,
-        })) as GraphQLResult<GetCommentsByOwnerQuery>;
+        })) as GraphQLResult<CommentExistsQuery>;
 
         if (
           json.data?.getCommentsByOwner?.items &&

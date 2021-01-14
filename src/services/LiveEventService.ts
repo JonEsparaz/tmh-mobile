@@ -1,7 +1,7 @@
 import moment from 'moment';
 import * as SecureStore from 'expo-secure-store';
 import { runGraphQLQuery } from './ApiService';
-import { listLivestreams } from './queries';
+import { listLivestreams } from './graphql/queries';
 
 export default class LiveEventService {
   static startLiveEventService = async (): Promise<any> => {

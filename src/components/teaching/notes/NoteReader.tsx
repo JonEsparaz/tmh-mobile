@@ -9,7 +9,7 @@ import {
   CustomText,
   HeaderImage,
 } from './TextComponents';
-import { GetNotesQuery } from '../../../services/API';
+import { GetNotesQuery } from '../../../services/graphql/API';
 
 type ContentType =
   | 'unstyled'

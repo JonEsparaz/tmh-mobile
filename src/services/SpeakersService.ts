@@ -1,11 +1,18 @@
 import { runGraphQLQuery } from './ApiService';
-import { ListSpeakersQuery } from './API';
+import { ListSpeakersQuery, ListSpeakersNoVideosQuery } from './graphql/API';
 import StaffDirectoryService from './StaffDirectoryService';
-import { listSpeakersNoVideos, listSpeakersQuery } from './queries';
+import { listSpeakersNoVideos, listSpeakersQuery } from './graphql/queries';
 
 export type loadSpeakersListData = {
   items: NonNullable<ListSpeakersQuery['listSpeakers']>['items'];
   nextToken: NonNullable<ListSpeakersQuery['listSpeakers']>['nextToken'];
+};
+
+export type loadSpeakersListDataNoVideos = {
+  items: NonNullable<ListSpeakersNoVideosQuery['listSpeakers']>['items'];
+  nextToken: NonNullable<
+    ListSpeakersNoVideosQuery['listSpeakers']
+  >['nextToken'];
 };
 
 export default class SpeakersService {
@@ -48,7 +55,7 @@ export default class SpeakersService {
   static loadSpeakersListOnly = async (
     limit = 9999,
     nextToken = null
-  ): Promise<loadSpeakersListData> => {
+  ): Promise<loadSpeakersListDataNoVideos> => {
     const queryResult = await runGraphQLQuery({
       query: listSpeakersNoVideos,
       variables: { limit, nextToken },

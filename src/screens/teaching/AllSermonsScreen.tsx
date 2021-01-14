@@ -17,10 +17,10 @@ import ActivityIndicator from '../../components/ActivityIndicator';
 import { TeachingStackParamList } from '../../navigation/MainTabNavigator';
 import { MainStackParamList } from '../../navigation/AppNavigator';
 import {
-  GetVideoByVideoTypeQuery,
-  GetVideoByVideoTypeQueryVariables,
+  AllSermonsQuery,
+  AllSermonsQueryVariables,
   ModelSortDirection,
-} from '../../services/API';
+} from '../../graphql/API';
 import AllButton from '../../components/buttons/AllButton';
 import { allSermonsQuery } from '../../graphql/queries';
 
@@ -75,7 +75,7 @@ const style = StyleSheet.create({
 });
 
 type VideoData = NonNullable<
-  NonNullable<GetVideoByVideoTypeQuery['getVideoByVideoType']>['items']
+  NonNullable<AllSermonsQuery['getVideoByVideoType']>['items']
 >;
 
 interface Params {
@@ -109,7 +109,7 @@ export default function AllSermonsScreen({
   useEffect(() => {
     async function loadSermonsAsync(nextToken?: string) {
       if (!blurred) {
-        const query: GetVideoByVideoTypeQueryVariables = {
+        const query: AllSermonsQueryVariables = {
           limit: 50,
           nextToken,
           videoTypes: 'adult-sunday',
@@ -118,7 +118,7 @@ export default function AllSermonsScreen({
         try {
           const videos = (await API.graphql(
             graphqlOperation(allSermonsQuery, query)
-          )) as GraphQLResult<GetVideoByVideoTypeQuery>;
+          )) as GraphQLResult<AllSermonsQuery>;
           if (videos.data?.getVideoByVideoType?.items)
             setSermons((prevState) => {
               return prevState.concat(

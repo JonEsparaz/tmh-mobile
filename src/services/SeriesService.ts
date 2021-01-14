@@ -4,13 +4,13 @@ import {
   GetSeriesBySeriesTypeQuery,
   GetSeriesQuery,
   ListCustomPlaylistsQuery,
-} from './API';
+} from './graphql/API';
 import {
   listCustomPlaylists,
   getCustomPlaylist,
   getSeriesBySeriesType,
   getSeries,
-} from './queries';
+} from './graphql/queries';
 
 type SeriesByTypeQueryResult = NonNullable<
   GetSeriesBySeriesTypeQuery['getSeriesBySeriesType']

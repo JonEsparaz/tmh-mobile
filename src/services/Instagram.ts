@@ -3,8 +3,8 @@ import {
   GetInstagramByLocationQuery,
   GetInstagramByLocationQueryVariables,
   ModelSortDirection,
-} from './API';
-import { getInstagramByLocation } from './queries';
+} from './graphql/API';
+import { getInstagramByLocation } from './graphql/queries';
 
 const locationsToUsername: { [loc: string]: string } = {
   alliston: 'themeetinghousealliston',

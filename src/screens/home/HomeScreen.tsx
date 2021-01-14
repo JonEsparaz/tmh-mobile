@@ -22,11 +22,13 @@ import * as Linking from 'expo-linking';
 import { CompositeNavigationProp } from '@react-navigation/native';
 import { API, GraphQLResult, graphqlOperation } from '@aws-amplify/api';
 import { Theme, Style, HeaderStyle } from '../../Theme.style';
-import AnnouncementCard from "../../components/home/AnnouncementCard";
-import AnnouncementService, { Announcement } from "../../services/AnnouncementService";
+import AnnouncementCard from '../../components/home/AnnouncementCard';
+import AnnouncementService, {
+  Announcement,
+} from '../../services/AnnouncementService';
 import EventCard from '../../components/home/EventCard';
 import RecentTeaching from '../../components/home/RecentTeaching';
-import EventsService, {EventQueryResult} from '../../services/EventsService';
+import EventsService, { EventQueryResult } from '../../services/EventsService';
 import ActivityIndicator from '../../components/ActivityIndicator';
 import LocationContext from '../../contexts/LocationContext';
 import { Location } from '../../services/LocationsService';
@@ -41,11 +43,11 @@ import UserContext from '../../contexts/UserContext';
 import { MainStackParamList } from '../../navigation/AppNavigator';
 import Header from '../../components/Header';
 import {
-  GetNotesQuery,
   GetVideoByVideoTypeQueryVariables,
   ModelSortDirection,
   GetVideoByVideoTypeQuery,
-} from '../../services/API';
+} from '../../graphql/API';
+import { GetNotesNoContentQuery } from '../../services/graphql/API';
 import { VideoData } from '../../utils/types';
 import NotesService from '../../services/NotesService';
 import { getVideoByVideoType } from '../../graphql/queries';
@@ -100,7 +102,7 @@ export default function HomeScreen({ navigation }: Params): JSX.Element {
   const [isLoading, setIsLoading] = useState(false);
   const [liveEvents, setLiveEvents] = useState<any>([]);
   const [teaching, setTeaching] = useState<VideoData>(null);
-  const [note, setNote] = useState<GetNotesQuery['getNotes']>(null);
+  const [note, setNote] = useState<GetNotesNoContentQuery['getNotes']>(null);
   const user = useContext(UserContext);
 
   const locationName = location?.locationData?.locationName;
@@ -179,10 +181,8 @@ export default function HomeScreen({ navigation }: Params): JSX.Element {
         id: location?.locationData?.locationId,
         name: location?.locationData?.locationName,
       } as Location);
-      if (announcementsResult)
-        setAnnouncements(announcementsResult)
-
-    }
+      if (announcementsResult) setAnnouncements(announcementsResult);
+    };
     loadAnnouncements();
 
     const loadInstagramImages = async () => {
@@ -331,14 +331,23 @@ export default function HomeScreen({ navigation }: Params): JSX.Element {
           </View>
         </View>
         <View style={style.categoryContainer}>
-          {announcements.length > 0 ? announcements.map((announcement: Announcement) => (
-            <AnnouncementCard
-              key={announcement?.id}
-              announcement={announcement}
-              handlePress={() =>
-                navigation.push('AnnouncementDetailsScreen', { item: announcement as Announcement })
-              } />
-          )) : announcements.length === 0 ? null : <View><ActivityIndicator></ActivityIndicator></View>}
+          {announcements.length > 0 ? (
+            announcements.map((announcement: Announcement) => (
+              <AnnouncementCard
+                key={announcement.id}
+                announcement={announcement}
+                handlePress={() =>
+                  navigation.push('AnnouncementDetailsScreen', {
+                    item: announcement as Announcement,
+                  })
+                }
+              />
+            ))
+          ) : announcements.length === 0 ? null : (
+            <View>
+              <ActivityIndicator></ActivityIndicator>
+            </View>
+          )}
         </View>
         {locationId !== 'unknown' || locationName !== 'unknown' ? (
           <View style={style.categoryContainer}>
@@ -352,26 +361,29 @@ export default function HomeScreen({ navigation }: Params): JSX.Element {
                   <>
                     <Text style={style.categoryTitle}>Upcoming Events</Text>
                     {events.map((event, index: number) => {
-                      if(index < 3) 
-                       return <EventCard
-                        key={event?.id}
-                        event={event}
-                        handlePress={() =>
-                          navigation.navigate('EventDetailsScreen', {
-                            item: event,
-                          })
-                        }
-                      />
-                      else return null;
-                      })}
-                    {events.length > 3 ?
-                    <AllButton
-                      handlePress={() => {
-                      navigation.navigate('AllEvents', {events:events});
-                      }}
-                    >
-                      See All Events
-                    </AllButton> : null}
+                      if (index < 3)
+                        return (
+                          <EventCard
+                            key={event?.id}
+                            event={event}
+                            handlePress={() =>
+                              navigation.navigate('EventDetailsScreen', {
+                                item: event,
+                              })
+                            }
+                          />
+                        );
+                      return null;
+                    })}
+                    {events.length > 3 ? (
+                      <AllButton
+                        handlePress={() => {
+                          navigation.navigate('AllEvents', { events });
+                        }}
+                      >
+                        See All Events
+                      </AllButton>
+                    ) : null}
                   </>
                 ) : (
                   <Text style={style.categoryTitle}>No Upcoming Events</Text>

@@ -25,7 +25,10 @@ import { TeachingStackParamList } from '../../navigation/MainTabNavigator';
 import MediaContext from '../../contexts/MediaContext';
 import { MainStackParamList } from '../../navigation/AppNavigator';
 import ShareModal from '../../components/modals/Share';
-import { GetCustomPlaylistQuery, GetSeriesQuery } from '../../services/API';
+import {
+  GetCustomPlaylistQuery,
+  GetSeriesQuery,
+} from '../../services/graphql/API';
 import NotesService from '../../services/NotesService';
 import { getSeries, getCustomPlaylist } from '../../graphql/queries';
 

@@ -1,7 +1,7 @@
 import API, { graphqlOperation, GraphQLResult } from '@aws-amplify/api';
 import { runGraphQLQuery } from './ApiService';
-import { GetVideoByVideoTypeQuery } from './API';
-import { getVideoByVideoType } from './queries';
+import { GetVideoByVideoTypeQuery } from './graphql/API';
+import { getVideoByVideoType } from './graphql/queries';
 
 export interface LoadSermonResult {
   items: NonNullable<GetVideoByVideoTypeQuery['getVideoByVideoType']>['items'];

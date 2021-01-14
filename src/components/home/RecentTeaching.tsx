@@ -12,7 +12,7 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import { TouchableHighlight } from 'react-native-gesture-handler';
 import { Theme, Style } from '../../Theme.style';
 import IconButton from '../buttons/IconButton';
-import { GetNotesQuery } from '../../services/API';
+import { GetNotesNoContentQuery } from '../../services/graphql/API';
 import { MainStackParamList } from '../../navigation/AppNavigator';
 import ActivityIndicator from '../ActivityIndicator';
 import { VideoData } from '../../utils/types';
@@ -69,7 +69,7 @@ const style = StyleSheet.create({
 });
 
 interface Props {
-  note: GetNotesQuery['getNotes'];
+  note: GetNotesNoContentQuery['getNotes'];
   teaching: VideoData;
 }
 

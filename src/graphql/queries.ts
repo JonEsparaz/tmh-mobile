@@ -1,4 +1,4 @@
-export const popularTeachingQuery = `query GetVideoByVideoType(
+export const popularTeachingQuery = `query PopularTeaching(
     $videoTypes: String
     $publishedDate: ModelStringKeyConditionInput
     $sortDirection: ModelSortDirection
@@ -126,7 +126,7 @@ export const getVideoByVideoType = `query GetVideoByVideoType(
   }
   `;
 
-export const allSermonsQuery = `query GetVideoByVideoType(
+export const allSermonsQuery = `query AllSermons(
     $videoTypes: String
     $publishedDate: ModelStringKeyConditionInput
     $sortDirection: ModelSortDirection
@@ -285,7 +285,7 @@ export const getCommentsByOwner = /* GraphQL */ `
 `;
 
 export const commentExistsQuery = /* GraphQL */ `
-  query GetCommentsByOwner(
+  query CommentExists(
     $owner: String
     $noteId: ModelStringKeyConditionInput
     $sortDirection: ModelSortDirection
@@ -367,7 +367,7 @@ export const listSpeakersQuery = `
   `;
 
 export const getTagsByOwner = /* GraphQL */ `
-  query GetCommentsByOwner(
+  query GetTagsByOwner(
     $owner: String
     $noteId: ModelStringKeyConditionInput
     $sortDirection: ModelSortDirection

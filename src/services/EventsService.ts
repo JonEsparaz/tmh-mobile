@@ -1,7 +1,7 @@
 import { runGraphQLQuery } from './ApiService';
 import LocationService, { Location } from './LocationsService';
-import { GetFbEventsQuery } from './API';
-import { getFbEvents } from './queries';
+import { GetFbEventsQuery } from './graphql/API';
+import { getFbEvents } from './graphql/queries';
 
 export type EventQueryResult = NonNullable<
   GetFbEventsQuery['getFBEvents']

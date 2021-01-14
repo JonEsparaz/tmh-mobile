@@ -25,7 +25,10 @@ import { TeachingStackParamList } from '../../navigation/MainTabNavigator';
 import ShareModal from '../../components/modals/Share';
 import { MainStackParamList } from '../../navigation/AppNavigator';
 import { Theme, Style, HeaderStyle } from '../../Theme.style';
-import { GetCustomPlaylistQuery, GetSeriesQuery } from '../../services/API';
+import {
+  GetCustomPlaylistQuery,
+  GetSeriesQuery,
+} from '../../services/graphql/API';
 import { FallbackImageBackground } from '../../components/FallbackImage';
 import { getSeries, getCustomPlaylist } from '../../graphql/queries';
 

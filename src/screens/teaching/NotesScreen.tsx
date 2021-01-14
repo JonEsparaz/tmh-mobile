@@ -22,11 +22,7 @@ import MiniPlayerStyleContext from '../../contexts/MiniPlayerStyleContext';
 import NoteReader from '../../components/teaching/notes/NoteReader';
 import Theme, { Style, HeaderStyle } from '../../Theme.style';
 import NotesService from '../../services/NotesService';
-import {
-  GetCommentsByOwnerQuery,
-  GetCommentsByOwnerQueryVariables,
-  GetNotesQuery,
-} from '../../services/API';
+import { GetNotesQuery } from '../../services/graphql/API';
 import CommentContext from '../../contexts/CommentContext';
 import OpenVerseModal from '../../components/modals/OpenVerseModal';
 import UserContext, {
@@ -35,6 +31,10 @@ import UserContext, {
 } from '../../contexts/UserContext';
 import Header from '../../components/Header';
 import { getCommentsByOwner } from '../../graphql/queries';
+import {
+  GetCommentsByOwnerQuery,
+  GetCommentsByOwnerQueryVariables,
+} from '../../graphql/API';
 
 interface Style {
   content: any;

@@ -17,7 +17,8 @@ import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import moment from 'moment';
 import { MainStackParamList } from '../../../navigation/AppNavigator';
-import { CommentDataType, GetNotesQuery } from '../../../services/API';
+import { GetNotesQuery } from '../../../services/graphql/API';
+import { CommentDataType } from '../../../graphql/API';
 import CommentContext, {
   CommentContextType,
 } from '../../../contexts/CommentContext';

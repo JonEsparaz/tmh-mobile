@@ -7,7 +7,6 @@ import MainTabNavigator, {
   MoreStackParamList,
 } from './MainTabNavigator';
 import AuthNavigator, { AuthStackParamList } from './AuthNavigator';
-
 import NotesScreen from '../screens/teaching/NotesScreen';
 import AllEvents from "../screens/home/AllEvents";
 import CommentScreen from '../screens/teaching/CommentScreen';
@@ -18,7 +17,7 @@ import LocationSelectionScreen from '../screens/LocationSelectionScreen';
 import HighlightScreen from '../screens/teaching/HighlightScreen';
 import DateRangeSelectScreen from '../screens/teaching/DateRangeSelectScreen';
 import SermonLandingScreen from '../screens/teaching/SermonLandingScreen';
-import { CommentDataType } from '../services/API';
+import { CommentDataType } from '../graphql/API';
 import LiveStreamScreen from '../screens/LiveStreamScreen';
 import TeacherList from '../screens/staff/TeacherList';
 import {EventQueryResult} from "../services/EventsService";

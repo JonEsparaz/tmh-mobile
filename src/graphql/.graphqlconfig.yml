@@ -1,0 +1,18 @@
+projects:
+  Codegen Project:
+    schemaPath: ./schema.json
+    includes:
+      - ./queries.ts
+      - ./mutations.ts
+    extensions:
+      amplify:
+        codeGenTarget: typescript
+        generatedFileName: ./API.ts
+        docsFilePath: src/graphql
+        region: us-east-1
+        apiId: null
+        frontend: javascript
+        framework: react-native
+extensions:
+  amplify:
+    version: 3
